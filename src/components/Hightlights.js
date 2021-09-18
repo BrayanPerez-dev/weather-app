@@ -68,17 +68,16 @@ const Hightlights = () => {
 export default Hightlights
 const Wrapper = styled.div`
 
-
 .contenedor-1{
 display:flex;
-justify-content: space-around;
+justify-content: space-evenly;
 flex-wrap: wrap;
 
 
 }
 .contenedor-2{
     display:flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     margin-bottom: 46.5px;
 
@@ -100,7 +99,7 @@ flex-wrap: wrap;
     width: 200px;
     height: 170px;
     background: #1E213A;
-    margin-top:5px;
+    margin-top:2.5px;
  
 }
 p{

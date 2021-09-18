@@ -64,7 +64,6 @@ const Weather = () => {
                 <Search />
                 </div>
                 <div className="container">
-                   
                 <div className="conver">
                     <div className="cel" onClick={() => setShowcel(true)}>
                         <p style={{ marginTop: '10px' }}>°C</p>
@@ -76,12 +75,7 @@ const Weather = () => {
                 </div>
                 <Nextdays />
                 <Hightlights /> 
-
                 </div>
-              
-
-
-
             </Wrapper>
         </ContextAPI.Provider>
 
@@ -93,7 +87,6 @@ export default Weather
 const Wrapper = styled.div`
  display:flex;
  height: 100%;
-
  background: #100E1D; 
 .wrap{ 
   -webkit-flex-wrap: wrap;
@@ -130,7 +123,6 @@ const Wrapper = styled.div`
 
 
 .search{
-   height:100vh
 }
 @media screen and (max-width: 665px) {
    .container{

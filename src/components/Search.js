@@ -49,70 +49,61 @@ const Search = () => {
 
 
     <Wrapper>
-
       {
 
         visible ?
-          
-            <div className="container-one">
 
-              <Input placeholder="Seach for places" className="input" onClick={showSearch} />
-              <div className="circle">
-                <AimOutlined style={{ color: '#E7E7EB', fontSize: '22px' }} />
-              </div>
-
+          <div className="container-one">
+            <Input placeholder="Seach for places" className="input" onClick={showSearch} />
+              <AimOutlined style={{ color: '#E7E7EB', fontSize: '22px' }} />
             <div className="day">
-              <img src={weatherStates(today.weather_state_abbr)} alt="wheater" style={{ width: '150px', height: '150px' }} />
-              <p style={{ fontStyle: 'normal', fontWeight: '500', fontSize: '75px', color: '#E7E7EB',marginBottom:'10px'}}>
+              <img src={weatherStates(today.weather_state_abbr)} alt="wheater" style={{ width: '150px', height: '225px' }} />
+              <p style={{ fontStyle: 'normal', fontWeight: '500', fontSize: '75px', color: '#E7E7EB', marginBottom: '10px', lineHeight: '90px' }}>
                 {showCel ? today.the_temp && today.the_temp.toFixed(2) : getCtoF(today.the_temp)}</p>
-              <p style={{ fontStyle: 'normal', fontWeight: '600', fontSize: '36px', color: '#A09FB1',marginBottom:'25px'}}>{today.weather_state_name}</p>
-              <p style={{ fontStyle: 'normal', fontWeight: '500', fontSize: '18px', color: '#88869D' }}>
+              <p style={{ fontStyle: 'normal', fontWeight: '600', fontSize: '36px', color: '#A09FB1', marginBottom: '25px', lineHeight: '70px' }}>{today.weather_state_name}</p>
+              <p style={{ fontStyle: 'normal', fontWeight: '500', fontSize: '18px', color: '#88869D', lineHeight: '70px' }}>
                 {moment(today.applicable_date).format(
                   "ddd, D MMM"
                 )}
               </p>
-              <span style={{ fontStyle: 'normal', fontWeight: '600', fontSize: '18px', color: '#88869D', display: 'flex' }} >
+              <span style={{ display: 'flex', fontStyle: 'normal', fontWeight: '600', fontSize: '18px', color: '#88869D' }} >
                 <EnvironmentOutlined /><p >&nbsp;{data.title}</p></span>
             </div>
-            </div>
-
-
-
+          </div>
           : <div className="container-two">
-          
             <Form
               name="basic"
               onFinish={onFinish}
             >
-  <div className="formulario">
+              <div className="formulario">
 
-              <CloseOutlined style={{ color: '#fff', marginLeft: '200px', marginBottom: '25px',marginTop:'10px'}} onClick={() => setVisible(prev => !prev)} />
-              <Form.Item
-                name="search"
-              >
-                <Input placeholder="Seach for places" prefix={<SearchOutlined className="icon" />} className="input-2" />
-              </Form.Item>
-              <Form.Item>
-                <Button type='primary' className="btn-antd" htmlType="submit" >
-                  <p style={{ color: '#fff' }}>Search</p>
-                </Button>
-              </Form.Item>
+                <CloseOutlined style={{ color: '#fff', marginLeft: '200px', marginBottom: '25px', marginTop: '10px' }} onClick={() => setVisible(prev => !prev)} />
+                <Form.Item
+                  name="search"
+                >
+                  <Input placeholder="Seach for places" prefix={<SearchOutlined className="icon" />} className="input-2" />
+                </Form.Item>
+                <Form.Item>
+                  <Button type='primary' className="btn-antd" htmlType="submit" >
+                    Search
+                  </Button>
+                </Form.Item>
               </div>
 
             </Form>
             <div className="citys">
-            {
-              citys.map((item, index) =>
-            
-                <Card key={index} className="lista" onClick={() => getPlace(item)}>
-                  <p className="results">{item.display_name}
-                    <FontAwesomeIcon icon={faChevronRight} className="arrow" />
-                  </p>
-                </Card>
+              {
+                citys.map((item, index) =>
 
-              )
-            }
-          </div>
+                  <Card key={index} className="lista" onClick={() => getPlace(item)}>
+                    <p className="results">{item.display_name}
+                      <FontAwesomeIcon icon={faChevronRight} className="arrow" />
+                    </p>
+                  </Card>
+
+                )
+              }
+            </div>
 
           </div>
 
@@ -130,18 +121,25 @@ export default Search
 const Wrapper = styled.div`
 background: #100E1D; 
  width:100%;
- height: 100%;   
-    .container-one{
-      width:300px;
-      height:100%;
-    background: #1E213A;
-      align-content: flex-start;
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items:baseline;
+ height: 100%;  
 
+    .container-one{
+      display:flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      justify-content: space-evenly;
+      align-items:baseline;
+      width:335px;
+      height:100%;
+      background: #1E213A;
     }
+    .container-two{
+  width: 300px;
+  height: 100%;
+  background: #1E213A;
+  justify-content: center;
+  overflow: auto;
+}
     
 
     .input{
@@ -198,19 +196,13 @@ line-height: 20px;
 
 .circle{
   
-width:'42';
+width:auto;
 border-radius: 10px;
 background: rgba(255, 255, 255, 0.2);
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.container-two{
-  width: 300px;
-  height: 100%;
-  background: #1E213A;
-  justify-content: center;
-  overflow: auto;
-}
+
 .formulario{
   display: flex;
   justify-content: space-evenly;
