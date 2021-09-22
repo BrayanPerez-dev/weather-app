@@ -39,23 +39,23 @@ const Nextdays = () => {
 
 export default Nextdays
 const Wrapper = styled.div`
- 
- display:flex;
-justify-content: center;
-flex-wrap: wrap;
-.days{
     
     display:flex;
-    justify-content:center;
-    width: 150px;
-    height: 170px;
-    margin:10px;
-    background: #1E213A;
-}
-.temps{
-    display:flex;
-    justify-content: space-evenly;
-}
+    justify-content: center;
+    flex-wrap: wrap;
+    .days{
+        
+        display:flex;
+        justify-content:center;
+        width: 150px;
+        height: 170px;
+        margin:10px;
+        background: #1E213A;
+    }
+    .temps{
+        display:flex;
+        justify-content: space-evenly;
+    }
 
 `
 

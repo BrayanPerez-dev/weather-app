@@ -1,62 +1,67 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext,useEffect } from 'react'
 import styled from 'styled-components'
 import 'antd/dist/antd.css'
 import { Form, Button, Input, Card } from 'antd';
 import { CloseOutlined, AimOutlined, SearchOutlined, EnvironmentOutlined } from '@ant-design/icons'
 import moment from "moment";
 import { weatherStates, getCtoF } from '../helpers/helpers'
-import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import ContextAPI from '../api/ContextAPI'
-
-const Search = () => {
+import places from '../api/places.json'
+ const Search = () => {
 
   const { data, getWoeid, today, showCel, } = useContext(ContextAPI)
   const [visible, setVisible] = useState(true)
   const [citys, setCitys] = useState([])
+  const [town, setTowns] = useState([])
+
   const showSearch = () => {
     setVisible(false)
   }
+  const fetchData  =  () => {
+   const data = places
+   setTowns(data)
+  }
+  useEffect(() => {
+    fetchData()
+  }, [])
+  
 
-  console.log(today)
-
-  const onFinish = (value) => {
-
+  /* const onFinish = (value) => {
     const { search } = value
-
-
     axios.get(`https://nominatim.openstreetmap.org/search/?city=${search}&format=json`)
       .then(res => {
-
-
         setCitys(res.data)
         return res.data
       })
+  } */
 
-
+  const onFinish = (value) => {
+    const { search } = value
+    const newSearch = search.trim()
+    const findData = town.filter(item =>{
+      return Object.keys(item).some((key) =>  item[key].toString().includes(newSearch)) 
+    })
+    setCitys(findData)
 
   }
-  const getPlace = (item) => {
-    getWoeid(item.lat, item.lon)
+  const getPlace = (name) => {
+    getWoeid(name)
     setVisible(true)
   }
-
-
+ 
   return (
-
-
-
-
-    <Wrapper>
+    <WrapperSearch>
       {
-
         visible ?
 
-          <div className="container-one">
-            <Input placeholder="Seach for places" className="input" onClick={showSearch} />
-              <AimOutlined style={{ color: '#E7E7EB', fontSize: '22px' }} />
-            <div className="day">
+          <div className="fix">
+            <div >
+              <span className="inpic">
+                <Input placeholder="Seach for places" className="input" onClick={showSearch} />
+                <AimOutlined style={{ color: '#E7E7EB', fontSize: '22px' }} />
+              </span>
               <img src={weatherStates(today.weather_state_abbr)} alt="wheater" style={{ width: '150px', height: '225px' }} />
               <p style={{ fontStyle: 'normal', fontWeight: '500', fontSize: '75px', color: '#E7E7EB', marginBottom: '10px', lineHeight: '90px' }}>
                 {showCel ? today.the_temp && today.the_temp.toFixed(2) : getCtoF(today.the_temp)}</p>
@@ -66,21 +71,18 @@ const Search = () => {
                   "ddd, D MMM"
                 )}
               </p>
-              <span style={{ display: 'flex', fontStyle: 'normal', fontWeight: '600', fontSize: '18px', color: '#88869D' }} >
-                <EnvironmentOutlined /><p >&nbsp;{data.title}</p></span>
+              <span className="location">
+                <EnvironmentOutlined /><p>&nbsp;{data.title}</p>
+              </span>
             </div>
           </div>
-          : <div className="container-two">
-            <Form
-              name="basic"
-              onFinish={onFinish}
-            >
-              <div className="formulario">
-
+          : <div className="fix-1">
+              <Form
+                onFinish={onFinish}
+              >
                 <CloseOutlined style={{ color: '#fff', marginLeft: '200px', marginBottom: '25px', marginTop: '10px' }} onClick={() => setVisible(prev => !prev)} />
-                <Form.Item
-                  name="search"
-                >
+                <div style={{display:'flex',justifyContent:'space-around'}}>
+                <Form.Item name="search" >
                   <Input placeholder="Seach for places" prefix={<SearchOutlined className="icon" />} className="input-2" />
                 </Form.Item>
                 <Form.Item>
@@ -88,15 +90,14 @@ const Search = () => {
                     Search
                   </Button>
                 </Form.Item>
-              </div>
-
-            </Form>
+                </div>
+              </Form>
             <div className="citys">
               {
                 citys.map((item, index) =>
 
-                  <Card key={index} className="lista" onClick={() => getPlace(item)}>
-                    <p className="results">{item.display_name}
+                  <Card key={index} className="lista" onClick={() => getPlace(item.name)}>
+                    <p className="results">{item.name}
                       <FontAwesomeIcon icon={faChevronRight} className="arrow" />
                     </p>
                   </Card>
@@ -104,13 +105,13 @@ const Search = () => {
                 )
               }
             </div>
+            </div>
 
-          </div>
 
       }
 
 
-    </Wrapper >
+    </WrapperSearch>
 
 
   )
@@ -118,29 +119,46 @@ const Search = () => {
 
 export default Search
 
-const Wrapper = styled.div`
-background: #100E1D; 
- width:100%;
- height: 100%;  
+const WrapperSearch = styled.div`
+width:400px;
+height: 100vh;  
 
-    .container-one{
-      display:flex;
-      flex-wrap: wrap;
-      align-content: flex-start;
-      justify-content: space-evenly;
-      align-items:baseline;
-      width:335px;
-      height:100%;
-      background: #1E213A;
-    }
-    .container-two{
-  width: 300px;
-  height: 100%;
+.fix{
+  text-align: center;
+  display:flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width:400px;
+  height:100vh;
   background: #1E213A;
-  justify-content: center;
-  overflow: auto;
 }
-    
+.fix-1{
+  text-align: center;
+  display:flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  overflow: auto;
+  width:400px;
+  height:100vh;
+  background: #1E213A;
+
+
+  
+}
+   
+    .inpic{
+      display:flex;
+      justify-content:space-around;
+      align-items:baseline;
+    }
+    .location{
+      display:inline-flex;
+      align-items:baseline;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      color: #88869D ;
+    }
 
     .input{
         width: 125px;
@@ -217,17 +235,20 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .lista{
 
-  width: 275px;
+  width: 250px;
   height: 75px;
+  margin-left: 10px;
   border:none;
   background: #1E213A;
+  justify-content: space-between;
   cursor:pointer;
+  margin-top: 20px;
  
 }
 .results{
   font-style: normal;
 font-weight: 500;
-font-size: 10px;
+font-size: 15px;
 color: #E7E7EB;
 }
 
@@ -246,19 +267,19 @@ box-sizing: border-box;
 }
 .arrow{
   display:none;
-margin-left:240px;
+margin-left:auto;
 color: #616475;
 margin-top:-15px;
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 375px) {
    
-  .container-one {
+  /* .fix {
     width:278px;
   } 
-  .container-two{
+  .fix-1{
     width:278px;
 
-  } 
+  }  */
  }
 `

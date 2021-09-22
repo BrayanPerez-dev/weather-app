@@ -34,13 +34,14 @@ const Weather = () => {
             console.log(error)
         }
     }
-    const getWoeid = async (lat, lon) => {
+    const getWoeid = async (name) => {
         setIsloading(true)
 
         try {
-            const response = await baseUrl.get(`/location/search/?lattlong=${lat}+${','}${lon}`)
+            const response = await baseUrl.get(`/location/search/?query=${name}`)
             const { data } = response
             const { woeid } = data[0]
+            console.log(woeid)
             setWoeid(woeid)
             setIsloading(false)
 
