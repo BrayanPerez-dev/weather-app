@@ -57,16 +57,16 @@ import places from '../api/places.json'
         visible ?
 
           <div className="fix">
-            <div >
+            <div>
               <span className="inpic">
                 <Input placeholder="Seach for places" className="input" onClick={showSearch} />
                 <AimOutlined style={{ color: '#E7E7EB', fontSize: '22px' }} />
               </span>
-              <img src={weatherStates(today.weather_state_abbr)} alt="wheater" style={{ width: '150px', height: '225px' }} />
-              <p style={{ fontStyle: 'normal', fontWeight: '500', fontSize: '75px', color: '#E7E7EB', marginBottom: '10px', lineHeight: '90px' }}>
+              <img src={weatherStates(today.weather_state_abbr)} alt={data.title} style={{ width: '175px', height: '225px' }} />
+              <p style={{ fontStyle: 'normal', fontWeight: '500', fontSize: '80px', color: '#E7E7EB', marginBottom: '10px', /* lineHeight: '90px' */ }}>
                 {showCel ? today.the_temp && today.the_temp.toFixed(2) : getCtoF(today.the_temp)}</p>
-              <p style={{ fontStyle: 'normal', fontWeight: '600', fontSize: '36px', color: '#A09FB1', marginBottom: '25px', lineHeight: '70px' }}>{today.weather_state_name}</p>
-              <p style={{ fontStyle: 'normal', fontWeight: '500', fontSize: '18px', color: '#88869D', lineHeight: '70px' }}>
+              <p style={{ fontStyle: 'normal', fontWeight: '600', fontSize: '45px', color: '#A09FB1', marginBottom: '25px', /* lineHeight: '70px' */ }}>{today.weather_state_name}</p>
+              <p style={{ fontStyle: 'normal', fontWeight: '500', fontSize: '30px', color: '#88869D', /* lineHeight: '70px' */ }}>
                 {moment(today.applicable_date).format(
                   "ddd, D MMM"
                 )}
@@ -126,19 +126,21 @@ height: 100vh;
 .fix{
   text-align: center;
   display:flex;
+  position: fixed;
   flex-direction: column;
   flex-wrap: wrap;
-  width:400px;
-  height:100vh;
+  width:375px;
+  height: 100vh;
   background: #1E213A;
 }
 .fix-1{
   text-align: center;
   display:flex;
+  position: fixed;
   flex-direction: column;
   flex-wrap: wrap;
   overflow: auto;
-  width:400px;
+  width:375px;
   height:100vh;
   background: #1E213A;
 
@@ -156,7 +158,7 @@ height: 100vh;
       align-items:baseline;
       font-style: normal;
       font-weight: 600;
-      font-size: 18px;
+      font-size: 25px;
       color: #88869D ;
     }
 
@@ -271,15 +273,22 @@ margin-left:auto;
 color: #616475;
 margin-top:-15px;
 }
+ 
+ 
 
-@media screen and (max-width: 375px) {
+ @media screen and (max-width: 730px) {
    
-  /* .fix {
-    width:278px;
+   .fix {
+    width:100vw;
+    position:inherit;
   } 
   .fix-1{
-    width:278px;
+    width:100vw;
+    position:inherit;
 
-  }  */
+  }  
  }
+  
+ 
+ 
 `

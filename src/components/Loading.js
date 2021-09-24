@@ -17,7 +17,8 @@ const Loading = () =>{
 export default Loading
 
 const Wrapper = styled.div`
-display:flex;
-justify-content:center;
-
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
 `

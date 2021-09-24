@@ -50,32 +50,32 @@ const Weather = () => {
 
         }
     }
+     // eslint-disable-next-line
     useEffect(() => {
         getData()
     }, [woeid])
 
 
 
-    if(isLoading) return <div><Loading/></div>
+    if (isLoading) return <div className="spinner"><Loading /></div>
     return (
         <ContextAPI.Provider value={{ data, getWoeid, consolidated_weather, today, showCel, setShowcel }}>
 
             <Wrapper >
-            <div className="search">
                 <Search />
-                </div>
                 <div className="container">
-                <div className="conver">
-                    <div className="cel" onClick={() => setShowcel(true)}>
-                        <p style={{ marginTop: '10px' }}>°C</p>
+                    <div className="conver">
+                        <div className="cel" onClick={() => setShowcel(true)}>
+                            <p style={{ marginTop: '10px' }}>°C</p>
+                        </div>
+                        &nbsp;
+                        <div className="fah" onClick={() => setShowcel(false)}>
+                            <p style={{ marginTop: '10px' }}>°F</p>
+                        </div>
                     </div>
-                    &nbsp;
-                    <div className="fah" onClick={() => setShowcel(false)}>
-                        <p style={{ marginTop: '10px' }}>°F</p>
-                    </div>
-                </div>
-                <Nextdays />
-                <Hightlights /> 
+
+                    <Nextdays />
+                    <Hightlights />
                 </div>
             </Wrapper>
         </ContextAPI.Provider>
@@ -87,13 +87,12 @@ export default Weather
 
 const Wrapper = styled.div`
  display:flex;
+ flex-flow:row;
  height: 100%;
  background: #100E1D; 
-.wrap{ 
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
-} 
-
+.container{
+    margin-left: 175px;
+}
 .conver{
     display: flex;
    margin-top:20px;
@@ -122,22 +121,18 @@ const Wrapper = styled.div`
     cursor: pointer
 }
 
-
-.search{
-}
+@media screen and (max-width: 730px) {
+    width: 100vw;
+    flex-wrap: wrap;
+    .container{
+     text-align: center;
+     margin-left:auto;
+    }
+ }
 @media screen and (max-width: 665px) {
    .container{
-    overflow: auto;
   }
 }
-@media screen and (max-width: 730px) {
+
    
-  flex-wrap: wrap;
- 
-}/* 
-@media screen and (min-height: 1035px) {
-   
-    height: 100vh;
- }
-   */
 `

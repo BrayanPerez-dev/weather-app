@@ -32,11 +32,13 @@ const Hightlights = () => {
     return (
         <Wrapper>
             <div className="contenedor-1">
-                <Card className="firts">
+                <Card  className="firts">
                     <p>Wind status</p>
                     <h1>{today.wind_speed && today.wind_speed.toFixed(2)}mph</h1>
+                    <span className="di">
                     <FontAwesomeIcon icon={faLocationArrow} className="direction" style={{ transform: `rotate(${today.wind_direction}deg)` }} />
                     <h5>{today.wind_direction_compass}</h5>
+                    </span>
                 </Card>
                 <Card className="firts">
                     <p>Humidity</p>
@@ -123,7 +125,8 @@ h5{
 }
 .direction{
     color:#E7E7EB;
-    margin-left:20px;
 }
-
+.di{
+    padding: 25%;
+}
 `
