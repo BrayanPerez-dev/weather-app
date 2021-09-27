@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import 'antd/dist/antd.css'
-import { Form, Button, Input, Card } from 'antd';
+import { Form, Button, Input, Card,Empty } from 'antd';
 import { CloseOutlined, AimOutlined, SearchOutlined, EnvironmentOutlined } from '@ant-design/icons'
 import moment from "moment";
 import { weatherStates, getCtoF } from '../helpers/helpers'
@@ -87,7 +87,7 @@ const Search = () => {
             </Form>
             <div className="citys">
               {
-                citys.map((item, index) =>
+                citys.length > 0 ? citys.map((item, index) =>
 
                   <Card key={index} className="lista" onClick={() => getPlace(item.name)}>
                     <p className="results">{item.name}
@@ -95,7 +95,7 @@ const Search = () => {
                     </p>
                   </Card>
 
-                )
+                ) : <Empty/>
               }
             </div>
           </div>
@@ -291,7 +291,9 @@ margin-top:-15px;
   font-size: 30px; 
   color: #88869D; 
 }
-
+.ant-empty-description{
+  color:#fff
+}
  @media screen and (max-width: 730px) {
    
    .fix {
