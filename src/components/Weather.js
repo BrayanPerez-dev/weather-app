@@ -17,23 +17,7 @@ const Weather = () => {
     const [today, setToday] = useState({})
 
 
-    const getData = async (id) => {
-        setIsloading(true)
-        try {
-
-            const response = await baseUrl.get(`/location/${woeid}`)
-
-            const { consolidated_weather } = response.data
-            const today = consolidated_weather[0]
-            setConsolidated_weather(consolidated_weather)
-            setToday(today)
-            setData(response.data)
-            setIsloading(false)
-
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    
     const getWoeid = async (name) => {
         setIsloading(true)
 
@@ -50,8 +34,24 @@ const Weather = () => {
 
         }
     }
-     // eslint-disable-next-line
     useEffect(() => {
+        const getData = async (id) => {
+        setIsloading(true)
+        try {
+
+            const response = await baseUrl.get(`/location/${woeid}`)
+
+            const { consolidated_weather } = response.data
+            const today = consolidated_weather[0]
+            setConsolidated_weather(consolidated_weather)
+            setToday(today)
+            setData(response.data)
+            setIsloading(false)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
         getData()
     }, [woeid])
 
@@ -126,13 +126,9 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
     .container{
      text-align: center;
-     margin-left:auto;
+     margin-left: auto;
     }
  }
-@media screen and (max-width: 665px) {
-   .container{
-  }
-}
-
+ 
    
 `

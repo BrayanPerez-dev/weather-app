@@ -1,4 +1,4 @@
-import React, { useState, useContext,useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import 'antd/dist/antd.css'
 import { Form, Button, Input, Card } from 'antd';
@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import ContextAPI from '../api/ContextAPI'
 import places from '../api/places.json'
- const Search = () => {
+const Search = () => {
 
   const { data, getWoeid, today, showCel, } = useContext(ContextAPI)
   const [visible, setVisible] = useState(true)
@@ -19,14 +19,14 @@ import places from '../api/places.json'
   const showSearch = () => {
     setVisible(false)
   }
-  const fetchData  =  () => {
-   const data = places
-   setTowns(data)
+  const fetchData = () => {
+    const data = places
+    setTowns(data)
   }
   useEffect(() => {
     fetchData()
   }, [])
-  
+
 
   /* const onFinish = (value) => {
     const { search } = value
@@ -40,8 +40,8 @@ import places from '../api/places.json'
   const onFinish = (value) => {
     const { search } = value
     const newSearch = search.trim()
-    const findData = town.filter(item =>{
-      return Object.keys(item).some((key) =>  item[key].toString().includes(newSearch)) 
+    const findData = town.filter(item => {
+      return Object.keys(item).some((key) => item[key].toString().includes(newSearch))
     })
     setCitys(findData)
 
@@ -50,38 +50,31 @@ import places from '../api/places.json'
     getWoeid(name)
     setVisible(true)
   }
- 
+
   return (
     <WrapperSearch>
       {
         visible ?
 
           <div className="fix">
-            <div>
+            <div className="">
               <span className="inpic">
                 <Input placeholder="Seach for places" className="input" onClick={showSearch} />
                 <AimOutlined style={{ color: '#E7E7EB', fontSize: '22px' }} />
               </span>
-              <img src={weatherStates(today.weather_state_abbr)} alt={data.title} style={{ width: '175px', height: '225px' }} />
-              <p style={{ fontStyle: 'normal', fontWeight: '500', fontSize: '80px', color: '#E7E7EB', marginBottom: '10px', /* lineHeight: '90px' */ }}>
-                {showCel ? today.the_temp && today.the_temp.toFixed(2) : getCtoF(today.the_temp)}</p>
-              <p style={{ fontStyle: 'normal', fontWeight: '600', fontSize: '45px', color: '#A09FB1', marginBottom: '25px', /* lineHeight: '70px' */ }}>{today.weather_state_name}</p>
-              <p style={{ fontStyle: 'normal', fontWeight: '500', fontSize: '30px', color: '#88869D', /* lineHeight: '70px' */ }}>
-                {moment(today.applicable_date).format(
-                  "ddd, D MMM"
-                )}
-              </p>
-              <span className="location">
-                <EnvironmentOutlined /><p>&nbsp;{data.title}</p>
-              </span>
+              <img src={weatherStates(today.weather_state_abbr)} alt={data.title} className="img" />
+              <p className="pp" >{showCel ? today.the_temp && today.the_temp.toFixed(2) : getCtoF(today.the_temp)}</p>
+              <p className="ps" >{today.weather_state_name}</p>
+              <p className="pt" >{moment(today.applicable_date).format("ddd, D MMM")}</p>
+              <span className="location"><EnvironmentOutlined /><p>&nbsp;{data.title}</p></span>
             </div>
           </div>
           : <div className="fix-1">
-              <Form
-                onFinish={onFinish}
-              >
-                <CloseOutlined style={{ color: '#fff', marginLeft: '200px', marginBottom: '25px', marginTop: '10px' }} onClick={() => setVisible(prev => !prev)} />
-                <div style={{display:'flex',justifyContent:'space-around'}}>
+            <Form
+              onFinish={onFinish}
+            >
+              <CloseOutlined style={{ color: '#fff', marginLeft: '200px', marginBottom: '25px', marginTop: '10px' }} onClick={() => setVisible(prev => !prev)} />
+              <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                 <Form.Item name="search" >
                   <Input placeholder="Seach for places" prefix={<SearchOutlined className="icon" />} className="input-2" />
                 </Form.Item>
@@ -90,8 +83,8 @@ import places from '../api/places.json'
                     Search
                   </Button>
                 </Form.Item>
-                </div>
-              </Form>
+              </div>
+            </Form>
             <div className="citys">
               {
                 citys.map((item, index) =>
@@ -105,7 +98,7 @@ import places from '../api/places.json'
                 )
               }
             </div>
-            </div>
+          </div>
 
 
       }
@@ -273,22 +266,51 @@ margin-left:auto;
 color: #616475;
 margin-top:-15px;
 }
- 
- 
+.img{
+  width: 175px;
+  height: 225px;
+}
+ .pp{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 75px;
+  color: #E7E7EB;
+  margin-bottom: 10px;
+}
+.ps{
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  color: #A09FB1; 
+  margin-bottom: 25px;
+
+}
+.pt{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px; 
+  color: #88869D; 
+}
 
  @media screen and (max-width: 730px) {
    
    .fix {
     width:100vw;
     position:inherit;
+    overflow: auto;
+    justify-content: center;
   } 
   .fix-1{
     width:100vw;
     position:inherit;
-
-  }  
- }
+    }  
   
- 
+ }
+ /* 
+ @media screen and (min-width:280px) and (max-width:800px){
+   display:none ;
+} */
+  
+  
  
 `
