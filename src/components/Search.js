@@ -40,12 +40,17 @@ const Search = () => {
   const onFinish = (value) => {
     const { search } = value
     const newSearch = search.trim()
-    const findData = town.filter(item => {
+    const foundData = town.filter(item => {
       return Object.keys(item).some((key) => item[key].toString().includes(newSearch))
     })
-    setCitys(findData)
+    localStorage.setItem('foundData', JSON.stringify(foundData))
+    setCitys(foundData)
 
   }
+  useEffect(() => {
+   const foundData = JSON.parse(localStorage.getItem('foundData'))
+   setCitys(foundData)
+  }, [])
   const getPlace = (name) => {
     getWoeid(name)
     setVisible(true)
@@ -87,7 +92,7 @@ const Search = () => {
             </Form>
             <div className="citys">
               {
-                citys.length > 0 ? citys.map((item, index) =>
+                citys && citys.length > 0 ? citys.map((item, index) =>
 
                   <Card key={index} className="lista" onClick={() => getPlace(item.name)}>
                     <p className="results">{item.name}
