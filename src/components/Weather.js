@@ -20,13 +20,12 @@ const Weather = () => {
     
     const getWoeid = async (name) => {
         setIsloading(true)
-
         try {
             const response = await baseUrl.get(`/location/search/?query=${name}`)
             const { data } = response
             const { woeid } = data[0]
-            console.log(woeid)
             setWoeid(woeid)
+            localStorage.setItem('woeid', JSON.stringify(woeid))
             setIsloading(false)
 
         } catch (error) {
@@ -37,9 +36,11 @@ const Weather = () => {
     useEffect(() => {
         const getData = async (id) => {
         setIsloading(true)
+        const persisWoeid = JSON.parse(localStorage.getItem('woeid'))
+        const finalWoeid = persisWoeid ? persisWoeid: woeid
         try {
 
-            const response = await baseUrl.get(`/location/${woeid}`)
+            const response = await baseUrl.get(`/location/${finalWoeid}`)
 
             const { consolidated_weather } = response.data
             const today = consolidated_weather[0]
@@ -73,7 +74,6 @@ const Weather = () => {
                             <p style={{ marginTop: '10px' }}>°F</p>
                         </div>
                     </div>
-
                     <Nextdays />
                     <Hightlights />
                 </div>
