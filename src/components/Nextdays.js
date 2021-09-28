@@ -9,7 +9,6 @@ import ContextAPI from '../api/ContextAPI'
 const Nextdays = () => {
     const { consolidated_weather,showCel} = useContext(ContextAPI)
      
-    console.log(consolidated_weather)
 
     return (
         <Wrapper>

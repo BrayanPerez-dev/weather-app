@@ -39,16 +39,13 @@ const Weather = () => {
         const persisWoeid = JSON.parse(localStorage.getItem('woeid'))
         const finalWoeid = persisWoeid ? persisWoeid: woeid
         try {
-
             const response = await baseUrl.get(`/location/${finalWoeid}`)
-
             const { consolidated_weather } = response.data
             const today = consolidated_weather[0]
             setConsolidated_weather(consolidated_weather)
             setToday(today)
             setData(response.data)
             setIsloading(false)
-
         } catch (error) {
             console.log(error)
         }
