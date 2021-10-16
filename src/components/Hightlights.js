@@ -31,7 +31,9 @@ const Hightlights = () => {
 
     return (
         <Wrapper>
+            <h4>Today's Hightlights</h4>
             <div className="contenedor-1">
+                
                 <Card  className="firts">
                     <p>Wind status</p>
                     <h1>{today.wind_speed && today.wind_speed.toFixed(2)}mph</h1>
@@ -63,7 +65,7 @@ const Hightlights = () => {
 export default Hightlights
 const Wrapper = styled.div`
 
-
+margin-bottom: 15px;
 .contenedor-1{
     display:flex;
     justify-content: space-evenly;
@@ -73,15 +75,18 @@ const Wrapper = styled.div`
     display:flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+}
 
-
+h4{
+    margin-left:8%;
+    color:#fff;
 }
 .wrap{ 
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
 }  
 .firts{
-    width: 275px;
+    width: 332px;
     height: 180px;
     background: #1E213A;
     justify-content: center;
@@ -89,8 +94,8 @@ const Wrapper = styled.div`
 
 }
 .second{
-    width: 275px;
-    height: 170px;
+    width: 332px;
+    height: 150px;
     background: #1E213A; 
     margin-bottom:5px;
 
@@ -128,5 +133,11 @@ h5{
 }
 .di{
     padding: 25%;
+}
+
+@media screen and (max-width:1040px){
+   h4{
+       text-align: center;
+   }
 }
 `
