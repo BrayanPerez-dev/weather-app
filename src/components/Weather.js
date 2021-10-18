@@ -55,7 +55,7 @@ const Weather = () => {
 
 
 
-    if (isLoading) return <div className="spinner"><Loading /></div>
+    if (isLoading) return<Loading />
     return (
         <ContextAPI.Provider value={{ data, getWoeid, consolidated_weather, today, showCel, setShowcel }}>
 
@@ -117,6 +117,7 @@ const Wrapper = styled.div`
     color:#E7E7EB;
     cursor: pointer
 }
+
 
 @media screen and (max-width: 730px) {
     width: 100vw;

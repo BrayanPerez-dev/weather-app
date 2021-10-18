@@ -31,7 +31,10 @@ const Hightlights = () => {
 
     return (
         <Wrapper>
+            <div className="title">
             <h4>Today's Hightlights</h4>
+            </div>
+            
             <div className="contenedor-1">
                 
                 <Card  className="firts">
@@ -65,7 +68,6 @@ const Hightlights = () => {
 export default Hightlights
 const Wrapper = styled.div`
 
-margin-bottom: 15px;
 .contenedor-1{
     display:flex;
     justify-content: space-evenly;
@@ -75,10 +77,15 @@ margin-bottom: 15px;
     display:flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    margin-bottom: 15px;
 }
 
+.title{
+    display:flex;
+    padding:20px 0px 20px 70px;
+} 
+
 h4{
-    margin-left:8%;
     color:#fff;
 }
 .wrap{ 
@@ -132,12 +139,15 @@ h5{
     color:#E7E7EB;
 }
 .di{
-    padding: 25%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
 }
 
-@media screen and (max-width:1040px){
-   h4{
-       text-align: center;
-   }
+@media screen and (max-width: 730px) {
+  .title{
+    justify-content: center;
+    padding: 0px;
+  }
 }
 `

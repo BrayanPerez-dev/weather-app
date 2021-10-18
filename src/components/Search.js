@@ -300,9 +300,11 @@ margin-top:-15px;
   color:#fff
 }
  @media screen and (max-width: 730px) {
+   height:100%;
    
    .fix {
     width:100vw;
+    height:max-content;
     position:inherit;
     overflow: auto;
     justify-content: center;
@@ -313,11 +315,6 @@ margin-top:-15px;
     }  
   
  }
- /* 
- @media screen and (min-width:280px) and (max-width:800px){
-   display:none ;
-} */
-  
-  
+
  
 `
